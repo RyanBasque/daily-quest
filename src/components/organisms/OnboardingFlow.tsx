@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Button } from '../atoms/Button';
-import { StepContent } from '../molecules/StepContent';
+import { StepContent } from '../atoms/StepContent';
 import { COLORS } from '@/assets/colors';
 
 const STEPS = [

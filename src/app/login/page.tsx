@@ -2,12 +2,20 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
 import { CenterTemplate } from '@/components/templates/CenterTemplate';
 import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { Input } from '@/components/atoms/Input';
 
+/**
+ * IMPORTANTE: NextAuth foi removido porque não é compatível com static export
+ * Para implementar autenticação:
+ * - Use Supabase (recomendado)
+ * - Use Firebase Authentication
+ * - Use API externa
+ * 
+ * Veja instruções em: AUTH_SETUP.md
+ */
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -16,23 +24,26 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     
-    // Using credentials provider (wired but might not work fully without registered user)
-    const result = await signIn('credentials', {
-      redirect: false,
-      email: (e.target as any).email.value,
-      password: (e.target as any).password.value,
-    });
+    const email = (e.target as any).email.value;
+    const password = (e.target as any).password.value;
 
-    if (result?.ok) {
-      router.push('/dashboard');
-    } else {
+    // TODO: Implementar autenticação
+    // Exemplo com Supabase:
+    // const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    // if (!error) router.push('/dashboard');
+
+    // Por enquanto, apenas redireciona (remover em produção)
+    console.log('Login attempt:', email);
+    setTimeout(() => {
+      alert('Autenticação não implementada. Veja AUTH_SETUP.md para instruções.');
       setLoading(false);
-      // Handle error (show toast/alert)
-    }
+    }, 500);
   };
 
   const handleSocialLogin = (provider: 'google' | 'apple') => {
-    signIn(provider, { callbackUrl: '/dashboard' });
+    // TODO: Implementar OAuth
+    // Exemplo: Use @capacitor-community/apple-sign-in ou @codetrix-studio/capacitor-google-auth
+    alert(`${provider} login não implementado.`);
   };
 
   return (

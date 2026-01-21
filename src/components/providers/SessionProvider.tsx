@@ -1,7 +1,11 @@
 'use client';
 
-import { SessionProvider as NextAuthSessionProvider } from "next-auth/react";
-
+/**
+ * SessionProvider vazio
+ * NextAuth foi removido porque não é compatível com static export
+ * Para autenticação, use Supabase, Firebase ou API externa
+ * Veja AUTH_SETUP.md para instruções
+ */
 export const SessionProvider = ({ children }: { children: React.ReactNode }) => {
-  return <NextAuthSessionProvider>{children}</NextAuthSessionProvider>;
+  return <>{children}</>;
 };

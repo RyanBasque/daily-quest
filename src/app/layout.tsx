@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Header } from "@/components/organisms/Header";
-import { SessionProvider } from "@/components/providers/SessionProvider";
+import { CapacitorProvider } from "@/components/providers/CapacitorProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +15,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+  themeColor: '#000000',
+};
+
 export const metadata: Metadata = {
   title: "Daily Quest",
   description: "Gamify your daily tasks",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Daily Quest',
+  },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -26,16 +41,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>
+        <CapacitorProvider>
           <ThemeProvider>
-              <Header />
-              {children}
+            <Header />
+            {children}
           </ThemeProvider>
-        </SessionProvider>
+        </CapacitorProvider>
       </body>
     </html>
   );
