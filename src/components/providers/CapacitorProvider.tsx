@@ -2,16 +2,28 @@
 
 import { useEffect } from 'react';
 import { initializeCapacitor } from '@/lib/capacitor';
+import { useTheme } from '@/context/ThemeContext';
 
-/**
- * Provider para inicializar Capacitor e configurações nativas
- * Coloque no layout root
- */
 export function CapacitorProvider({ children }: { children: React.ReactNode }) {
+  const { theme } = useTheme();
+
   useEffect(() => {
-    // Inicializar Capacitor quando o app carrega
     initializeCapacitor();
   }, []);
+
+  useEffect(() => {
+    const updateStatusBar = async () => {
+      try {
+        const { StatusBar, Style } = await import('@capacitor/status-bar');
+        
+        await StatusBar.setStyle({ style: Style.Default });
+        await StatusBar.setBackgroundColor({ color: '#00000000' });
+        
+      } catch (error) {}
+    };
+
+    updateStatusBar();
+  }, [theme]);
 
   return <>{children}</>;
 }

@@ -48,11 +48,11 @@ export const StepContent: React.FC<StepContentProps> = ({ title, description, im
   }, { scope: container });
 
   return (
-    <div ref={container} className="flex flex-col items-center text-center space-y-6 max-w-md mx-auto opacity-0">
+    <div ref={container} className="flex flex-col items-center text-center space-y-4 max-w-sm mx-auto opacity-0">
       {image && (
         <div 
           ref={imageWrapper}
-          className="w-64 h-64 glass-card rounded-full flex items-center justify-center mb-8 shadow-2xl relative overflow-hidden group"
+          className="w-32 h-32 glass-card rounded-full flex items-center justify-center mb-6 shadow-2xl relative overflow-hidden group"
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-50" />
           <div className="relative z-10 transition-transform duration-500 group-hover:scale-110">

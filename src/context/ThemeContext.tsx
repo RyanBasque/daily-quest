@@ -32,10 +32,21 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
+    // Usar View Transitions API para transição mais suave (se disponível)
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        if (newTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      });
     } else {
-      document.documentElement.classList.remove('dark');
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   };
 

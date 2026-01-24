@@ -1,6 +1,3 @@
-// hooks/useNativeAPIs.ts
-// Hook para acessar APIs nativas do Capacitor
-
 import { useState, useEffect } from 'react';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Device } from '@capacitor/device';
@@ -34,38 +31,6 @@ export const useNativeAPIs = () => {
 
     checkPlatform();
   }, []);
-
-  const takePhoto = async () => {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: false,
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Camera,
-      });
-
-      return image.webPath;
-    } catch (error) {
-      console.error('Erro ao tirar foto:', error);
-      throw error;
-    }
-  };
-
-  const pickPhoto = async () => {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: false,
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Photos,
-      });
-
-      return image.webPath;
-    } catch (error) {
-      console.error('Erro ao escolher foto:', error);
-      throw error;
-    }
-  };
 
   const registerPushNotifications = async () => {
     if (!isNative) {
@@ -114,13 +79,11 @@ export const useNativeAPIs = () => {
     }
   };
 
-  // Obter informações do dispositivo
   const getDeviceInfo = async (): Promise<DeviceInfo> => {
     const info = await Device.getInfo();
     return info as DeviceInfo;
   };
 
-  // Obter ID do dispositivo
   const getDeviceId = async () => {
     const info = await Device.getId();
     return info.identifier;
@@ -129,8 +92,6 @@ export const useNativeAPIs = () => {
   return {
     isNative,
     deviceInfo,
-    takePhoto,
-    pickPhoto,
     registerPushNotifications,
     getDeviceInfo,
     getDeviceId,

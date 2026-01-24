@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Header } from "@/components/organisms/Header";
 import { CapacitorProvider } from "@/components/providers/CapacitorProvider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,12 +46,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CapacitorProvider>
-          <ThemeProvider>
+        <ThemeProvider>
+          <CapacitorProvider>
             <Header />
             {children}
-          </ThemeProvider>
-        </CapacitorProvider>
+            <Toaster 
+              position="top-center" 
+              richColors 
+              closeButton 
+              expand={false}
+              theme="system"
+            />
+          </CapacitorProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

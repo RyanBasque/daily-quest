@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CenterTemplate } from '@/components/templates/CenterTemplate';
 import { OnboardingFlow } from '@/components/organisms/OnboardingFlow';
+import { BackButton } from '@/components/atoms/BackButton';
 
 export default function Home() {
   const router = useRouter();
@@ -12,11 +13,11 @@ export default function Home() {
   useEffect(() => {
     const hasCompletedOnboarding = localStorage.getItem('daily-quest-onboarding-completed');
     
-    if (hasCompletedOnboarding === 'true') {
-      router.replace('/dashboard');
-    } else {
+    // if (hasCompletedOnboarding === 'true') {
+    //   router.replace('/dashboard');
+    // } else {
       setIsChecking(false);
-    }
+    // }
   }, [router]);
 
   if (isChecking) {

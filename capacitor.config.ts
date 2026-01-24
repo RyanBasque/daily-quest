@@ -24,8 +24,7 @@ const config: CapacitorConfig = {
     },
     
     StatusBar: {
-      style: 'dark',
-      backgroundColor: '#000000',
+      overlaysWebView: true,
     },
     
     PushNotifications: {
@@ -34,8 +33,10 @@ const config: CapacitorConfig = {
   },
 
   ios: {
-    contentInset: 'always',
+    contentInset: 'automatic',
+    scrollEnabled: true,
     scheme: 'Daily Quest',
+    preferredContentMode: 'mobile',
   },
 
   android: {

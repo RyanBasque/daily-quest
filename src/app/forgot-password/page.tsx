@@ -6,6 +6,7 @@ import { CenterTemplate } from '@/components/templates/CenterTemplate';
 import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { Input } from '@/components/atoms/Input';
+import { BackButton } from '@/components/atoms/BackButton';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -16,7 +17,6 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     setLoading(true);
     
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     setLoading(false);
@@ -25,6 +25,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <CenterTemplate>
+      <BackButton />
       <div className="glass-card w-full max-w-md mx-auto p-6 sm:p-12 rounded-3xl animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="text-center mb-6 sm:mb-10 space-y-2">
           <Typography variant="h2">Reset Password</Typography>

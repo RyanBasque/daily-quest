@@ -2,11 +2,15 @@
 
 import React, { useEffect, useState } from 'react';
 import { ThemeToggle } from '../atoms/ThemeToggle';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+
+  const hiddenRoutes = ['/login', '/forgot-password'];
+  const shouldHideHeader = hiddenRoutes.includes(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,15 +20,17 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  if (shouldHideHeader) return null;
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-100 ease-in-out safe-top safe-x ${
         scrolled 
-          ? 'py-3 bg-white/60 dark:bg-zinc-800/95 backdrop-blur-xl dark:backdrop-blur-xl border-b border-white/20 dark:border-white/10 shadow-sm dark:shadow-md' 
+          ? 'py-3 bg-white/60 dark:bg-black/80 backdrop-blur-md border-b border-white/20 dark:border-white/10 shadow-sm' 
           : 'py-6 bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+      <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
         {/* Logo Area */}
         <div 
             onClick={() => router.push('/')}
